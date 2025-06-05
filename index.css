@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 227 95% 8%;
+  --foreground: 0 0% 100%;
+  --muted: 225 30% 20%;
+  --muted-foreground: 215 20% 65%;
+  --popover: 222 47% 8%;
+  --popover-foreground: 0 0% 100%;
+  --card: 222 47% 8%;
+  --card-foreground: 0 0% 100%;
+  --border: 225 30% 25%;
+  --input: 225 30% 25%;
+  --primary: 262 100% 63%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 225 30% 25%;
+  --secondary-foreground: 0 0% 100%;
+  --accent: 162 100% 48%;
+  --accent-foreground: 227 95% 8%;
+  --destructive: 352 100% 63%;
+  --destructive-foreground: 0 0% 100%;
+  --ring: 262 100% 63%;
+  --radius: 0.5rem;
+  
+  /* Chart colors */
+  --chart-1: 262 100% 63%;
+  --chart-2: 162 100% 48%;
+  --chart-3: 352 100% 63%;
+  --chart-4: 48 96% 53%;
+  --chart-5: 215 20% 65%;
+  
+  /* Sidebar colors */
+  --sidebar-background: 222 47% 8%;
+  --sidebar-foreground: 0 0% 100%;
+  --sidebar-primary: 262 100% 63%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 162 100% 48%;
+  --sidebar-accent-foreground: 227 95% 8%;
+  --sidebar-border: 225 30% 25%;
+  --sidebar-ring: 262 100% 63%;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans bg-background text-foreground;
+    background-image: 
+      radial-gradient(circle at 25% 25%, rgba(110, 68, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 75% 75%, rgba(0, 245, 212, 0.05) 0%, transparent 50%);
+  }
+  
+  .glow {
+    box-shadow: 0 0 15px rgba(0, 245, 212, 0.5);
+    position: relative;
+  }
+  
+  .glow::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: inherit;
+    background: linear-gradient(45deg, rgba(110, 68, 255, 0.5), rgba(0, 245, 212, 0.5));
+    z-index: -1;
+    filter: blur(10px);
+    opacity: 0.5;
+  }
+  
+  .crypto-gradient-text {
+    background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: hsl(222 47% 8%);
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(225 30% 25%);
+    border-radius: 3px;
+  }
+  
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(262 100% 63%);
+  }
+  
+  .crypto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(110, 68, 255, 0.2);
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  @keyframes chartLine {
+    0% { transform: scaleX(0); transform-origin: left; }
+    100% { transform: scaleX(1); transform-origin: left; }
+  }
+  
+  .chart-line {
+    animation: chartLine 2s ease-out forwards;
+  }
+  
+  /* Login page specific styles */
+  .auth-bg {
+    background-image: 
+      radial-gradient(circle at 15% 15%, rgba(110, 68, 255, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 85% 85%, rgba(0, 245, 212, 0.1) 0%, transparent 50%);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .auth-bg::before {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: -50%;
+    left: -50%;
+    z-index: -1;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 40 40'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%236e44ff' fill-opacity='0.03'%3E%3Cpath d='M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 20.83l2.83-2.83 1.41 1.41L1.41 22.24H0v-1.41zM0 3.07l2.83-2.83 1.41 1.41L1.41 4.48H0V3.07zm20.76-1.41L21.17 0h1.41l-.83.83 1.41 1.41L21.41 4.07 19.99 2.66l.77-.76zm20.76 35.93l-2.83 2.83-1.41-1.41 2.83-2.83v1.41zm0-17.76l-2.83 2.83-1.41-1.41 2.83-2.84v1.42zm0-17.76l-2.83 2.83-1.41-1.41L40 1.41V2.83zM22.24 40l.83-.83-1.41-1.41-.83.83H22.24zM4.07 19.17l-1.41 1.41-2.83-2.83v-1.41l4.24 2.83zM4.07 1.41L2.66 0h1.41l.83.83 1.41 1.41L4.48 4.07 3.07 2.66l.99-.99zm17.76 0l-1.41 1.41-1.41-1.41h2.83zM0 36.76l2.83-2.83 1.41 1.41L1.41 38.17H0v-1.41zm0-18.83L2.83 15.1l1.41 1.41-2.83 2.83H0v-1.41zm20.76-18.84L22.17 0h1.41l-.83.83 1.41 1.41L21.41 4.07l-1.41-1.41.76-.83zm18.93 30.52l-2.83-2.83 1.41-1.41 2.83 2.83v1.41h-1.41zm0-17.77l-2.83-2.83 1.41-1.41 2.83 2.83v1.41h-1.41zm0-17.76l-2.83-2.83 1.41-1.41L40 1.41V2.83h-1.41zM21.41 40l.83-.83-1.41-1.41-.83.83h1.41zm-18.93-1.41l-1.41-1.41L3.9 39.01 2.49 40H1.07v-1.41h.01zm0-36.18L1.07 0h1.41l.83.83 1.41 1.41-2.83 2.83-1.41-1.41.83-.83zm36.69 36.18L38.24 40h-1.41l-.83-.83-1.41-1.41 2.83-2.83 1.41 1.41-.83.83zm0-36.18L38.24 0h1.41l.83.83 1.41 1.41-2.83 2.83-1.41-1.41.83-.83z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  
+  .button-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .button-shine::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: 0.5s;
+  }
+  
+  .button-shine:hover::after {
+    left: 100%;
+  }
+}
